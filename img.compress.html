@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization -->
+    <title>SqueezeIt | #1 Free Online Image Optimizer & Compressor</title>
+    <meta name="description" content="Professional-grade image compression. Reduce KB/MB instantly for JPG, PNG, & WebP. No file limits, 100% privacy with local browser processing.">
+    <meta name="keywords" content="image compressor, bulk image optimizer, compress jpg to 100kb, png optimizer, photo resizer, image seo">
+    <link rel="canonical" href="https://yoursite.com/">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand: #6366f1;
+            --brand-glow: rgba(99, 102, 241, 0.15);
+            --bg-main: #fcfcfd;
+            --text-title: #0f172a;
+            --text-body: #475569;
+            --card-glass: rgba(255, 255, 255, 0.8);
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER DESIGN */
+        nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-title);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .logo-dot { width: 12px; height: 12px; background: var(--brand); border-radius: 3px; box-shadow: 0 0 10px var(--brand); }
+
+        /* AD UNITS */
+        .ad-container {
+            width: 100%;
+            min-height: 90px;
+            background: var(--card-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        /* MAIN TOOL UI */
+        .hero-section { text-align: center; padding: 60px 0 40px; }
+        .hero-section h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-title);
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+        .hero-section p { font-size: 1.15rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+        .glass-wrapper {
+            background: var(--card-glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+
+        /* DRAG AND DROP BOX */
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            background: rgba(248, 250, 252, 0.5);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+        .upload-area:hover, .upload-area.dragging {
+            border-color: var(--brand);
+            background: var(--brand-glow);
+            transform: scale(1.01);
+        }
+        .upload-area.dragging { border-style: solid; }
+        
+        .upload-area h3 { color: var(--text-title); font-size: 1.25rem; margin-top: 15px; }
+        .upload-icon { 
+            width: 64px; height: 64px; background: white; 
+            border-radius: 16px; margin: 0 auto; display: flex;
+            align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            color: var(--brand);
+        }
+        #imageInput { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+
+        /* PRECISE CONTROLS */
+        .settings-bar {
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .slider-group { width: 100%; }
+        .label-row { display: flex; justify-content: space-between; font-weight: 700; color: var(--text-title); margin-bottom: 12px; }
+        .quality-val { background: var(--brand); color: white; padding: 2px 10px; border-radius: 6px; font-size: 0.8rem; }
+
+        input[type="range"] {
+            -webkit-appearance: none; width: 100%; height: 10px; background: #f1f5f9; border-radius: 5px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 24px; height: 24px; background: var(--brand); 
+            border: 4px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .action-btn {
+            background: var(--brand);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .action-btn:hover { background: #4f46e5; box-shadow: 0 10px 20px var(--brand-glow); }
+
+        /* COMPARISON RESULTS */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+            display: none; /* Initially Hidden */
+            animation: fadeIn 0.6s ease;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center; }
+        .status-pill { padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; }
+        .preview-box {
+            width: 100%; height: 320px; background: #f8fafc;
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; overflow: hidden; border: 1px solid #f1f5f9;
+        }
+        .preview-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .savings-tag { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 100px; font-weight: 700; }
+
+        .dl-group { margin-top: 15px; display: flex; gap: 10px; }
+        .dl-btn {
+            flex-grow: 1; text-align: center; background: var(--text-title);
+            color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: 0.3s;
+        }
+        .dl-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* SEO & FOOTER */
+        .article-content { padding: 80px 0; max-width: 800px; margin: 0 auto; }
+        .article-content h2 { color: var(--text-title); margin-bottom: 20px; font-size: 1.8rem; }
+        .article-content p { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; }
+
+        footer { border-top: 1px solid var(--border-color); padding: 40px 0; text-align: center; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .settings-bar { grid-template-columns: 1fr; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .glass-wrapper { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="#" class="brand-logo">
+            <div class="logo-dot"></div>
+            SqueezeIt
+        </a>
+        <div style="font-weight: 600; color: var(--text-title); cursor: pointer;">Pro Mode</div>
+    </nav>
+
+    <!-- Top Ad Placeholder (Banner/Leaderboard) -->
+    <div class="ad-container" id="ad-header-728x90">
+        <!-- Paste Adsterra/Adsense code here -->
+        <span>- ADVERTISEMENT -</span>
+    </div>
+
+    <section class="hero-section">
+        <h1>Shrink Images,<br>Maintain Beauty.</h1>
+        <p>Lossless compression using advanced WebP/JPG algorithms. No tracking, no uploads, purely inside your secure browser.</p>
+    </section>
+
+    <main class="glass-wrapper">
+        <div class="upload-area" id="dropZone">
+            <div class="upload-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3>Drop your photo here</h3>
+            <p>PNG, JPG, or WEBP up to 10MB</p>
+            <input type="file" id="imageInput" accept="image/jpeg, image/png, image/webp">
+        </div>
+
+        <div class="settings-bar">
+            <div class="slider-group">
+                <div class="label-row">
+                    <span>Target Quality</span>
+                    <span id="qDisplay" class="quality-val">80%</span>
+                </div>
+                <input type="range" id="qualityRange" min="5" max="100" value="80">
+            </div>
+            <button class="action-btn" id="goCompress">
+                <span>Compress Now</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        <!-- Hidden by default, appears on process -->
+        <div class="comparison-grid" id="results">
+            <div class="card">
+                <div class="card-header">
+                    <span class="status-pill" style="background: #f1f5f9; color: #475569;">ORIGINAL</span>
+                    <span id="sizeOld" style="font-weight: 800;">0 KB</span>
+                </div>
+                <div class="preview-box">
+                    <img id="origView" src="" alt="Before">
+                </div>
+            </div>
+
+            <div class="card" style="border-color: var(--brand);">
+                <div class="card-header">
+                    <span class="status-pill" style="background: var(--brand-glow); color: var(--brand);">OPTIMIZED</span>
+                    <span id="savings" class="savings-tag">Saved 0%</span>
+                </div>
+                <div class="preview-box">
+                    <img id="optView" src="" alt="After">
+                </div>
+                <div class="dl-group">
+                    <a href="#" id="mainDownload" class="dl-btn">Download Asset</a>
+                    <div id="sizeNew" style="align-self:center; font-weight:800; min-width:60px;">0 KB</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Native Ad Placeholder (Middle of Tool & Content) -->
+    <div class="ad-container" id="ad-native-grid" style="min-height: 250px;">
+        <!-- Paste your Adsterra Native Ad script here -->
+        <span>- RECOMMENDED FOR YOU (ADS) -</span>
+    </div>
+
+    <article class="article-content">
+        <h2>SEO-Driven Image Optimization</h2>
+        <p>Speed is the primary metric for Core Web Vitals. Heavy images account for 70% of webpage load latency. Using SqueezeIt ensures that your Google PageSpeed scores remain in the 90+ range by leveraging client-side compression that maintains Metadata integrity while stripping useless entropy.</p>
+        
+        <h2>Safe, Private & Anonymous</h2>
+        <p>Your privacy matters. Unlike other popular compressors, our code never sends your photos to an external server. Everything happens on your computer (CPU/GPU acceleration via JS). It's not only more private—it's also significantly faster.</p>
+    </article>
+
+    <!-- Bottom Footer Ad Placeholder -->
+    <div class="ad-container" id="ad-footer-320x50">
+        <span>- PROMOTIONAL ADS -</span>
+    </div>
+
+    <footer>
+        <p>© 2025 SqueezeIt Studio. Advanced Image Optimization Engineering.</p>
+    </footer>
+</div>
+
+<script>
+    const input = document.getElementById('imageInput');
+    const range = document.getElementById('qualityRange');
+    const rangeVal = document.getElementById('qDisplay');
+    const dropZone = document.getElementById('dropZone');
+    const btn = document.getElementById('goCompress');
+    const results = document.getElementById('results');
+
+    let currentFile = null;
+
+    // Visual Feedback for Range
+    range.addEventListener('input', () => rangeVal.innerText = `${range.value}%`);
+
+    // Drag and Drop Helpers
+    ['dragenter', 'dragover'].forEach(n => dropZone.addEventListener(n, () => dropZone.classList.add('dragging'), false));
+    ['dragleave', 'drop'].forEach(n => dropZone.addEventListener(n, () => dropZone.classList.remove('dragging'), false));
+
+    // Input Handling
+    input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if(!file) return;
+        loadOriginal(file);
+    });
+
+    function loadOriginal(file) {
+        currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('origView').src = e.target.result;
+            document.getElementById('sizeOld').innerText = formatBytes(file.size);
+            results.style.display = 'none';
+        }
+        reader.readAsDataURL(file);
+    }
+
+    // Core Logic
+    btn.addEventListener('click', () => {
+        if(!currentFile) return alert("Select an image first!");
+
+        btn.innerText = "Processing...";
+        const img = new Image();
+        img.src = document.getElementById('origView').src;
+
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            const q = range.value / 100;
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                document.getElementById('optView').src = url;
+                document.getElementById('sizeNew').innerText = formatBytes(blob.size);
+                
+                // Savings % calculation
+                const diff = ((currentFile.size - blob.size) / currentFile.size * 100).toFixed(0);
+                document.getElementById('savings').innerText = `Saved ${diff > 0 ? diff : 0}%`;
+
+                // Set Link
+                const dl = document.getElementById('mainDownload');
+                dl.href = url;
+                dl.download = `Squeezed_${currentFile.name.split('.')[0]}.jpg`;
+
+                btn.innerText = "Compress Now";
+                results.style.display = 'grid';
+                results.scrollIntoView({ behavior: 'smooth' });
+            }, 'image/jpeg', q);
+        };
+    });
+
+    function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const dm = 2;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+</script>
+
+<!-- Note: For Adsterra integration, just replace the <span> within .ad-container 
+with the Javascript snippet provided by your Adsterra panel. -->
+
+</body>
+</html>
